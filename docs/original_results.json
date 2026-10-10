@@ -1,0 +1,580 @@
+{
+  "_note": "Transcribed from the stored cell outputs of the supplied notebooks. HISTORICAL, not re-run. Not leakage-audited unless stated.",
+  "reddit": {
+    "notebook": "reddit-dataset-model__2_.ipynb",
+    "protocol": "random stratified 80/20 split (random_state=42), no validation split, TF-IDF max_features=5000 fitted on train, legacy clean_text applied before split",
+    "n_total": 1024932,
+    "n_train": 819945,
+    "n_test": 204987,
+    "class_distribution": {
+      "depression": 613073,
+      "lonely": 153823,
+      "suicidewatch": 115397,
+      "mentalhealth": 81249,
+      "anxiety": 61390
+    },
+    "models": {
+      "LogisticRegression(max_iter=1000)": {
+        "accuracy": 0.69,
+        "macro_f1": 0.51,
+        "weighted_f1": 0.65,
+        "per_class_PRF": {
+          "anxiety": [
+            0.74,
+            0.58,
+            0.65
+          ],
+          "depression": [
+            0.7,
+            0.91,
+            0.79
+          ],
+          "lonely": [
+            0.69,
+            0.52,
+            0.59
+          ],
+          "mentalhealth": [
+            0.58,
+            0.2,
+            0.29
+          ],
+          "suicidewatch": [
+            0.51,
+            0.15,
+            0.23
+          ]
+        }
+      },
+      "MultinomialNB": {
+        "accuracy": 0.64,
+        "macro_f1": 0.32,
+        "weighted_f1": 0.55,
+        "per_class_PRF": {
+          "anxiety": [
+            0.79,
+            0.22,
+            0.35
+          ],
+          "depression": [
+            0.63,
+            0.98,
+            0.77
+          ],
+          "lonely": [
+            0.76,
+            0.28,
+            0.41
+          ],
+          "mentalhealth": [
+            0.66,
+            0.03,
+            0.06
+          ],
+          "suicidewatch": [
+            0.67,
+            0.01,
+            0.02
+          ]
+        }
+      },
+      "LinearSVC(dual=False)": {
+        "accuracy": 0.69,
+        "macro_f1": 0.48,
+        "weighted_f1": 0.63,
+        "per_class_PRF": {
+          "anxiety": [
+            0.73,
+            0.57,
+            0.64
+          ],
+          "depression": [
+            0.69,
+            0.93,
+            0.79
+          ],
+          "lonely": [
+            0.68,
+            0.5,
+            0.58
+          ],
+          "mentalhealth": [
+            0.64,
+            0.13,
+            0.21
+          ],
+          "suicidewatch": [
+            0.53,
+            0.09,
+            0.16
+          ]
+        }
+      },
+      "RandomForest(n_estimators=50)": {
+        "accuracy": 0.66,
+        "macro_f1": 0.38,
+        "weighted_f1": 0.58,
+        "per_class_PRF": {
+          "anxiety": [
+            0.77,
+            0.39,
+            0.52
+          ],
+          "depression": [
+            0.66,
+            0.96,
+            0.78
+          ],
+          "lonely": [
+            0.7,
+            0.38,
+            0.49
+          ],
+          "mentalhealth": [
+            0.57,
+            0.04,
+            0.07
+          ],
+          "suicidewatch": [
+            0.42,
+            0.03,
+            0.05
+          ]
+        }
+      },
+      "LightGBM(default)": {
+        "accuracy": 0.68,
+        "macro_f1": 0.48,
+        "weighted_f1": 0.63,
+        "per_class_PRF": {
+          "anxiety": [
+            0.72,
+            0.57,
+            0.64
+          ],
+          "depression": [
+            0.69,
+            0.92,
+            0.79
+          ],
+          "lonely": [
+            0.68,
+            0.49,
+            0.57
+          ],
+          "mentalhealth": [
+            0.61,
+            0.14,
+            0.23
+          ],
+          "suicidewatch": [
+            0.53,
+            0.1,
+            0.16
+          ]
+        }
+      },
+      "MLPClassifier(100)": "cell has no stored output (never completed) and would raise NameError on 'model.classes_'"
+    }
+  },
+  "edaic": {
+    "split": {
+      "train": [
+        163,
+        126,
+        37
+      ],
+      "dev": [
+        56,
+        44,
+        12
+      ],
+      "test": [
+        56,
+        39,
+        17
+      ]
+    },
+    "note": "split sizes are [n, PHQ_Binary=0, PHQ_Binary=1]; totals 275 participants (209 / 66)",
+    "runs": [
+      {
+        "id": "svm_161_platt",
+        "notebook": "svm-lr__1_",
+        "features": "161 = 23 LLD x 7 stats, -201 kept as data",
+        "model": "SVC rbf C=1 gamma=0.001 balanced probability=True",
+        "train_cv_f1": 0.3182,
+        "dev_threshold": 0.1,
+        "dev": {
+          "acc": 0.2143,
+          "precision": 0.2143,
+          "recall": 1.0,
+          "f1": 0.3529,
+          "roc_auc": 0.5739,
+          "pr_auc": 0.3163,
+          "cm": [
+            [
+              0,
+              44
+            ],
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        "test": {
+          "acc": 0.3036,
+          "precision": 0.3036,
+          "recall": 1.0,
+          "f1": 0.4658,
+          "roc_auc": 0.6621,
+          "pr_auc": 0.4523,
+          "cm": [
+            [
+              0,
+              39
+            ],
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        "caveat": "all-positive predictions; Platt scores collapsed to ~0.228"
+      },
+      {
+        "id": "logreg_161",
+        "notebook": "svm-lr__1_",
+        "features": "161",
+        "model": "LogisticRegression C=0.01 balanced (no PCA)",
+        "train_cv_f1": 0.3065,
+        "dev_threshold": 0.34,
+        "dev": {
+          "acc": 0.3214,
+          "precision": 0.24,
+          "recall": 1.0,
+          "f1": 0.3871,
+          "roc_auc": 0.5038,
+          "pr_auc": 0.3075,
+          "cm": [
+            [
+              6,
+              38
+            ],
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        "test": {
+          "acc": 0.4464,
+          "precision": 0.3542,
+          "recall": 1.0,
+          "f1": 0.5231,
+          "roc_auc": 0.6908,
+          "pr_auc": 0.4744,
+          "cm": [
+            [
+              8,
+              31
+            ],
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        "caveat": "near all-positive; at threshold 0.5 (feature-audit): test acc 0.5893 P 0.4118 R 0.8235 F1 0.5490"
+      },
+      {
+        "id": "xgboost_161",
+        "notebook": "random-forest__1_ (file name says random forest; code is XGBoost)",
+        "features": "161",
+        "model": "XGBClassifier depth2 n_est200 lr0.03 subsample0.8 colsample0.6 scale_pos_weight3.405; early stopping on dev (best_iteration 36)",
+        "train_cv_f1": 0.2252,
+        "dev_threshold": 0.57,
+        "dev": {
+          "acc": 0.8036,
+          "precision": 0.5714,
+          "recall": 0.3333,
+          "f1": 0.4211,
+          "roc_auc": 0.5095,
+          "pr_auc": 0.3472,
+          "cm": [
+            [
+              41,
+              3
+            ],
+            [
+              8,
+              4
+            ]
+          ]
+        },
+        "test": {
+          "acc": 0.75,
+          "precision": 0.5882,
+          "recall": 0.5882,
+          "f1": 0.5882,
+          "roc_auc": 0.7466,
+          "pr_auc": 0.6232,
+          "cm": [
+            [
+              32,
+              7
+            ],
+            [
+              7,
+              10
+            ]
+          ]
+        },
+        "caveat": "dev used for early stopping AND threshold; feature-audit refit with n_estimators=36 gave test ROC-AUC 0.7376 / PR-AUC 0.5971 (F1 0.5490 at threshold 0.5) - small unexplained discrepancy"
+      },
+      {
+        "id": "svm_margin_161",
+        "notebook": "feature-audit__1_",
+        "features": "161",
+        "model": "SVC rbf C=1 gamma=0.001, decision_function min-max scaled on dev range",
+        "dev_threshold": 0.6,
+        "dev": {
+          "acc": 0.6071,
+          "precision": 0.3077,
+          "recall": 0.6667,
+          "f1": 0.4211,
+          "roc_auc": 0.5739,
+          "pr_auc": 0.3163,
+          "cm": [
+            [
+              26,
+              18
+            ],
+            [
+              4,
+              8
+            ]
+          ]
+        },
+        "test": {
+          "acc": 0.5893,
+          "precision": 0.4211,
+          "recall": 0.9412,
+          "f1": 0.5818,
+          "roc_auc": 0.6621,
+          "pr_auc": 0.4523,
+          "cm": [
+            [
+              17,
+              22
+            ],
+            [
+              1,
+              16
+            ]
+          ]
+        }
+      },
+      {
+        "id": "fs_xgboost_k50",
+        "notebook": "feature-audit__1_",
+        "features": "SelectKBest(ANOVA) K=50 inside CV",
+        "train_cv_f1": 0.3633,
+        "dev_threshold": 0.12,
+        "dev": {
+          "acc": 0.2679,
+          "precision": 0.2264,
+          "recall": 1.0,
+          "f1": 0.3692,
+          "roc_auc": 0.392,
+          "pr_auc": 0.2378
+        },
+        "test": {
+          "acc": 0.3036,
+          "precision": 0.3036,
+          "recall": 1.0,
+          "f1": 0.4658,
+          "roc_auc": 0.6176,
+          "pr_auc": 0.4441
+        },
+        "caveat": "all-positive on test; at threshold 0.5: acc 0.625 P 0.4286 R 0.7059 F1 0.5333"
+      },
+      {
+        "id": "fs_logreg_k50",
+        "notebook": "feature-audit__1_",
+        "features": "SelectKBest K=50",
+        "train_cv_f1": 0.3444,
+        "dev_threshold": 0.72,
+        "dev": {
+          "acc": 0.8214,
+          "precision": 0.6667,
+          "recall": 0.3333,
+          "f1": 0.4444,
+          "roc_auc": 0.536,
+          "pr_auc": 0.4305
+        },
+        "test": {
+          "acc": 0.6786,
+          "precision": 0.4545,
+          "recall": 0.2941,
+          "f1": 0.3571,
+          "roc_auc": 0.6229,
+          "pr_auc": 0.3928
+        },
+        "caveat": "at threshold 0.5: test acc 0.6429 F1 0.5455"
+      },
+      {
+        "id": "fs_svm_k30",
+        "notebook": "feature-audit__1_",
+        "features": "SelectKBest K=30",
+        "train_cv_f1": 0.33,
+        "dev_threshold": 0.84,
+        "dev": {
+          "acc": 0.8214,
+          "precision": 0.6667,
+          "recall": 0.3333,
+          "f1": 0.4444,
+          "roc_auc": 0.5436,
+          "pr_auc": 0.3533
+        },
+        "test": {
+          "acc": 0.6964,
+          "precision": 0.5,
+          "recall": 0.2941,
+          "f1": 0.3704,
+          "roc_auc": 0.7119,
+          "pr_auc": 0.4563
+        }
+      },
+      {
+        "id": "audio_modeling_186_dev_default_threshold",
+        "notebook": "edaic-audio-modeling__1_",
+        "features": "186 = eGeMAPS 69 + MFCC 117 (mean/std/median; -201 -> NaN)",
+        "dev_only": true,
+        "dev": {
+          "logreg": {
+            "acc": 0.6964,
+            "precision": 0.3333,
+            "recall": 0.4167,
+            "f1": 0.3704,
+            "roc_auc": 0.6894,
+            "pr_auc": 0.494
+          },
+          "svm_rbf_C1": {
+            "acc": 0.6429,
+            "precision": 0.2778,
+            "recall": 0.4167,
+            "f1": 0.3333,
+            "roc_auc": 0.7045,
+            "pr_auc": 0.4352
+          },
+          "rf500": {
+            "acc": 0.7857,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "roc_auc": 0.7576,
+            "pr_auc": 0.4138
+          }
+        },
+        "train_5fold_cv_default_threshold": {
+          "logreg": {
+            "f1": 0.2135,
+            "roc_auc": 0.606,
+            "pr_auc": 0.3259
+          },
+          "svm_rbf": {
+            "f1": 0.1939,
+            "roc_auc": 0.5196,
+            "pr_auc": 0.2871
+          },
+          "rf": {
+            "f1": 0.0,
+            "roc_auc": 0.525,
+            "pr_auc": 0.3082
+          }
+        },
+        "dev_with_oof_threshold": {
+          "logreg_t0.20": {
+            "acc": 0.75,
+            "precision": 0.4444,
+            "recall": 0.6667,
+            "f1": 0.5333
+          },
+          "svm_t0.15": {
+            "acc": 0.2143,
+            "precision": 0.2143,
+            "recall": 1.0,
+            "f1": 0.3529
+          },
+          "rf_t0.20": {
+            "acc": 0.4286,
+            "precision": 0.2619,
+            "recall": 0.9167,
+            "f1": 0.4074
+          }
+        },
+        "feature_sets_logreg_dev": {
+          "eGeMAPS": {
+            "f1": 0.2759,
+            "roc_auc": 0.4678
+          },
+          "MFCC": {
+            "f1": 0.4,
+            "roc_auc": 0.6799
+          },
+          "Combined": {
+            "f1": 0.3704,
+            "roc_auc": 0.6894
+          }
+        },
+        "caveat": "test split never evaluated in this notebook; RF/SVM/LR thresholds were typed in by hand after reading the OOF table"
+      },
+      {
+        "id": "bilstm_pooled250",
+        "notebook": "bilstm__2_",
+        "features": "23 LLD frames averaged in blocks of 250 frames (2.5 s)",
+        "model": "BiLSTM(32)+attention, dropout .4, Adam 1e-3, wd 1e-4, batch 8, pos_weight 3.405, early stop patience 10 on dev F1",
+        "dev": {
+          "acc": 0.7679,
+          "precision": 0.4545,
+          "recall": 0.4167,
+          "f1": 0.4348
+        },
+        "test": {
+          "acc": 0.5357,
+          "precision": 0.2857,
+          "recall": 0.3529,
+          "f1": 0.3158
+        },
+        "caveat": "best dev F1 reached at epoch 1; threshold fixed at 0.5; notebook text refers to a 'classical F1=0.632 baseline' that does not appear in any supplied notebook output"
+      }
+    ],
+    "derived_here": {
+      "method": "percentile bootstrap (10,000 resamples, seed 0) over test records reconstructed from each reported confusion matrix; computed with mindtext.evaluation.bootstrap_ci",
+      "test_f1_positive_95ci": {
+        "xgboost_161 (F1 0.588)": [
+          0.364,
+          0.762
+        ],
+        "all-positive rule (F1 0.466)": [
+          0.328,
+          0.6
+        ],
+        "logreg_161 thr .34 (F1 0.523)": [
+          0.369,
+          0.658
+        ],
+        "svm_margin_161 (F1 0.582)": [
+          0.415,
+          0.725
+        ]
+      },
+      "all_positive_test_baseline": {
+        "precision": 0.3036,
+        "recall": 1.0,
+        "f1": 0.4658
+      }
+    }
+  }
+}
