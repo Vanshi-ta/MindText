@@ -1,0 +1,43 @@
+# Binary PHQ-label classification from participant-level acoustic statistics (E-DAIC).
+# Runs on the SYNTHETIC sample by default. For real data create the feature table with
+# `python -m mindtext build-acoustic-features ...` and pass --data.
+data:
+  path: data/sample_acoustic.csv
+  description: "SYNTHETIC demo data - metrics are meaningless"
+  task: tabular
+  label_column: label
+  id_column: participant_id
+  split_column: split        # official train/dev/test assignment is preserved
+  positive_label: "1"
+  allowed_labels: ["0", "1"]
+  exclude_columns: [PHQ_Score, PHQ_Binary, Gender, "PCL-C (PTSD)", "PTSD Severity"]  # never features
+split:
+  strategy: predefined
+  split_names: {train: [train], val: [dev], test: [test]}
+tabular:
+  impute_strategy: median
+  scale: true
+  variance_threshold: 0.0
+models:
+  - {name: majority, type: majority, provenance: original}
+  - {name: logreg,   type: logreg,   provenance: original, params: {class_weight: balanced, max_iter: 5000}, tune: {C: [0.001, 0.01, 0.1, 1, 10]}}
+  - {name: svm_rbf,  type: svm_rbf,  provenance: original, params: {class_weight: balanced}, tune: {C: [0.1, 1, 10], gamma: [scale, 0.01, 0.001]}}
+  - {name: rf,       type: rf,       provenance: original, params: {n_estimators: 500, class_weight: balanced}}
+  # XGBoost was the best original model; enable with: pip install 'mindtext[boosting]'
+  # - {name: xgboost, type: xgboost, provenance: original, params: {max_depth: 2, n_estimators: 200, learning_rate: 0.03, subsample: 0.8, colsample_bytree: 0.6, scale_pos_weight: auto}}
+threshold:
+  enabled: true              # chosen on the dev split only
+  metric: f1_positive
+train:
+  seed: 42
+  cv_folds: 5
+  tune_metric: f1_positive
+  selection_metric: macro_f1
+  bootstrap_samples: 1000
+  n_jobs: 1
+error_analysis:
+  n_examples: 5
+  include_text: false
+output:
+  reports_dir: reports
+  artifacts_dir: artifacts

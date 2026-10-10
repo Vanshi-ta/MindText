@@ -1,0 +1,19 @@
+# Approximates the ORIGINAL Reddit notebook as closely as this framework allows:
+# legacy cleaning (needs nltk + its stopwords/wordnet data), TF-IDF unigrams max 5000,
+# no class weights. Differences that remain: a validation split is carved out
+# (original: plain 80/20), duplicates are dropped, "[removed]" posts are dropped.
+data:
+  path: data/reddit_mental_health.csv     # produced by `mindtext prepare-reddit`
+  description: "Reddit mental health posts (real data, not bundled)"
+  task: text
+  id_column: null
+  allowed_labels: [anxiety, depression, lonely, mentalhealth, suicidewatch]
+split: {strategy: stratified, val_size: 0.1, test_size: 0.2}
+text: {legacy_clean: true}
+tfidf: {max_features: 5000, ngram_range: [1, 1], min_df: 1, sublinear_tf: false}
+models:
+  - {name: logreg,    type: logreg,    provenance: original}
+  - {name: nb,        type: nb,        provenance: original}
+  - {name: linearsvc, type: linearsvc, provenance: original, params: {dual: false}}
+  - {name: rf,        type: rf,        provenance: original, params: {n_estimators: 50, n_jobs: -1}}
+train: {seed: 42, selection_metric: macro_f1, bootstrap_samples: 0, n_jobs: 1}

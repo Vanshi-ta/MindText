@@ -1,0 +1,53 @@
+# Text classification (Reddit-style, multi-class). Runs out of the box on the SYNTHETIC
+# sample; for real data pass --data <your combined CSV> (see data/README.md).
+data:
+  path: data/sample.csv
+  description: "SYNTHETIC demo data - metrics are meaningless"
+  task: text
+  text_column: text
+  label_column: label
+  id_column: id
+  allowed_labels: [anxiety, depression, lonely, mentalhealth, suicidewatch]
+  invalid_label_policy: error
+  placeholder_texts: ["[removed]", "[deleted]"]
+  dedup_policy: drop_exact
+split:
+  strategy: stratified      # use 'grouped' if a group/author column exists, 'chronological' for time-based
+  val_size: 0.15
+  test_size: 0.20
+text:
+  lowercase: true
+  url_policy: token
+  strip_html: true
+  remove_stopwords: false   # NLTK-style lists drop negations ("not", "no"); keep off unless ablated
+  lemmatize: false
+tfidf:
+  max_features: 20000
+  ngram_range: [1, 2]
+  min_df: 2
+  sublinear_tf: true
+models:
+  # --- models that exist in the original notebooks (retrained here with a leakage-safe protocol)
+  - {name: majority,  type: majority,  provenance: original}
+  - {name: nb,        type: nb,        provenance: original, params: {alpha: 1.0}}
+  - {name: logreg,    type: logreg,    provenance: original, tune: {C: [0.3, 1.0, 3.0]}}
+  - {name: linearsvc, type: linearsvc, provenance: original, tune: {C: [0.1, 0.3, 1.0]}}
+  # --- new variants (not in the original notebooks)
+  - {name: logreg_balanced, type: logreg, provenance: new, params: {class_weight: balanced}, tune: {C: [0.3, 1.0, 3.0]}}
+  # Random Forest / LightGBM were also run originally; enable on real data if desired:
+  # - {name: rf,       type: rf,       provenance: original, params: {n_estimators: 50}}
+  # - {name: lightgbm, type: lightgbm, provenance: original}   # needs: pip install 'mindtext[boosting]'
+train:
+  seed: 42
+  cv_folds: 3
+  tune_metric: f1_macro
+  selection_metric: macro_f1
+  bootstrap_samples: 200
+  n_jobs: 1
+error_analysis:
+  n_examples: 5
+  include_text: true
+  excerpt_chars: 160
+output:
+  reports_dir: reports
+  artifacts_dir: artifacts
