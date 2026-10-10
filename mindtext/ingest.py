@@ -67,7 +67,7 @@ def prepare_reddit(
     first = True
     for f in files:
         label = infer_label(f.name, rules)
-        rel = str(f.relative_to(raw))
+        rel = f.relative_to(raw).as_posix()
         if label is None:
             summary["unmatched_files"].append(rel)
             continue
