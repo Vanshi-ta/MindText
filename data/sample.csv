@@ -1,0 +1,201 @@
+id,text,label
+syn-00000,day worry think about exam this just,anxiety
+syn-00001,it is lately helpline when today helpline and people,suicidewatch
+syn-00002,week resources think about isolated this maybe,lonely
+syn-00003,much alone feel about friends this not,lonely
+syn-00004,it is week crisis when people helpline and much,suicidewatch
+syn-00005,crisis maybe helpline today not maybe,suicidewatch
+syn-00006,i really sleep and today panic work,anxiety
+syn-00007,not support work about therapy this week,mentalhealth
+syn-00008,not empty maybe about nervous this not,anxiety
+syn-00009,think urgent much about resources this maybe,mentalhealth
+syn-00010,week motivation people about heavy this work,depression
+syn-00011,i much crisis and just advice day,mentalhealth
+syn-00012,panic week helpline much lately week,suicidewatch
+syn-00013,it is lately therapy when people habits and think,mentalhealth
+syn-00014,just invite week about alone this much,lonely
+syn-00015,deadline work exam not work work,anxiety
+syn-00016,i feel exam and just exam again,anxiety
+syn-00017,week resources think about therapy this think,mentalhealth
+syn-00018,worry not exam really today not,anxiety
+syn-00019,day weekend again about numb this work,depression
+syn-00020,i feel urgent and really helpline day,suicidewatch
+syn-00021,resources work routine lately really work,mentalhealth
+syn-00022,tired lately numb feel really lately,depression
+syn-00023,resources just habits again lately just,mentalhealth
+syn-00024,day sleep today about motivation this not,depression
+syn-00025,support week resources week week week,mentalhealth
+syn-00026,day exhausted people about crisis this not,suicidewatch
+syn-00027,feel urgent not about overwhelmed this work,suicidewatch
+syn-00028,week routine just about advice this again,mentalhealth
+syn-00029,it is day heavy when feel numb and much,depression
+syn-00030,deadline work overthinking much think work,anxiety
+syn-00031,really tired week about tired this really,depression
+syn-00032,people crisis day about routine this work,mentalhealth
+syn-00033,i not quiet and much weekend just,lonely
+syn-00034,i people numb and day overthinking much,anxiety
+syn-00035,i again crisis and just reaching people,suicidewatch
+syn-00036,i people routine and week advice feel,mentalhealth
+syn-00037,i feel exam and really exam again,anxiety
+syn-00038,it is today isolated when work invite and think,lonely
+syn-00039,it is feel friends when today quiet and work,lonely
+syn-00040,feel therapy today about habits this think,mentalhealth
+syn-00041,it is maybe sleep when maybe tired and feel,depression
+syn-00042,feel worry work about overthinking this just,anxiety
+syn-00043,maybe isolated maybe about isolated this week,lonely
+syn-00044,helpline today crisis feel today today,suicidewatch
+syn-00045,people tired really about motivation this just,depression
+syn-00046,it is people motivation when not nervous and feel,anxiety
+syn-00047,it is week tired when just numb and today,depression
+syn-00048,i think quiet and just quiet today,lonely
+syn-00049,again habits maybe about advice this lately,mentalhealth
+syn-00050,i work empty and much numb again,depression
+syn-00051,it is day advice when think support and maybe,mentalhealth
+syn-00052,it is maybe helpline when people exhausted and think,suicidewatch
+syn-00053,i work quiet and feel quiet not,lonely
+syn-00054,again routine think about advice this much,mentalhealth
+syn-00055,it is day motivation when maybe deadline and much,anxiety
+syn-00056,i just worry and much panic day,anxiety
+syn-00057,it is lately deadline when maybe helpline and not,suicidewatch
+syn-00058,just motivation again about heavy this just,depression
+syn-00059,it is week tired when day tired and just,depression
+syn-00060,i people advice and again advice week,mentalhealth
+syn-00061,i not alone and people weekend maybe,lonely
+syn-00062,reaching people crisis work not people,suicidewatch
+syn-00063,day worry week about exam this day,anxiety
+syn-00064,i maybe reaching and week resources week,mentalhealth
+syn-00065,weekend really weekend people just really,lonely
+syn-00066,i just tired and week numb much,depression
+syn-00067,it is think reaching when again reaching and not,suicidewatch
+syn-00068,tired week tired much day week,depression
+syn-00069,really alone week about isolated this lately,lonely
+syn-00070,i lately routine and feel routine work,mentalhealth
+syn-00071,week invite much about friends this just,lonely
+syn-00072,routine much resources day just much,mentalhealth
+syn-00073,it is day weekend when not quiet and lately,lonely
+syn-00074,resources maybe routine maybe maybe maybe,mentalhealth
+syn-00075,much friends lately about friends this again,lonely
+syn-00076,it is again isolated when just quiet and lately,lonely
+syn-00077,deadline not worry work lately not,anxiety
+syn-00078,sleep people worry think week people,anxiety
+syn-00079,urgent really therapy much feel really,mentalhealth
+syn-00080,it is lately overwhelmed when people exhausted and lately,suicidewatch
+syn-00081,heavy think heavy work maybe think,depression
+syn-00082,it is lately routine when think advice and work,mentalhealth
+syn-00083,it is today reaching when just overwhelmed and day,suicidewatch
+syn-00084,week quiet not about isolated this people,lonely
+syn-00085,it is not isolated when really empty and maybe,depression
+syn-00086,it is day deadline when lately worry and not,anxiety
+syn-00087,it is not sleep when day heavy and just,depression
+syn-00088,advice think habits really lately think,mentalhealth
+syn-00089,i again urgent and just helpline day,suicidewatch
+syn-00090,i think empty and lately numb much,depression
+syn-00091,again panic people about exam this week,anxiety
+syn-00092,overwhelmed today crisis really really today,suicidewatch
+syn-00093,i maybe empty and work sleep maybe,depression
+syn-00094,exhausted maybe helpline really day maybe,suicidewatch
+syn-00095,reaching feel exhausted lately day feel,suicidewatch
+syn-00096,i today reaching and much helpline people,suicidewatch
+syn-00097,just reaching lately about support this think,mentalhealth
+syn-00098,it is people alone when maybe quiet and work,lonely
+syn-00099,think quiet just about invite this work,lonely
+syn-00100,it is think crisis when much habits and lately,mentalhealth
+syn-00101,not urgent really about reaching this really,suicidewatch
+syn-00102,sleep think empty maybe work think,depression
+syn-00103,it is lately worry when again worry and today,anxiety
+syn-00104,again habits work about weekend this feel,lonely
+syn-00105,i think alone and maybe quiet day,lonely
+syn-00106,think therapy maybe about alone this day,lonely
+syn-00107,empty really numb not work really,depression
+syn-00108,overwhelmed maybe helpline maybe day maybe,suicidewatch
+syn-00109,i again sleep and day heavy lately,depression
+syn-00110,i maybe sleep and again heavy day,depression
+syn-00111,it is people isolated when people sleep and day,depression
+syn-00112,really tired feel about sleep this day,depression
+syn-00113,i work support and maybe isolated people,lonely
+syn-00114,i today panic and work worry again,anxiety
+syn-00115,helpline week overwhelmed maybe not week,suicidewatch
+syn-00116,i much numb and really overthinking day,anxiety
+syn-00117,it is day exam when week crisis and not,suicidewatch
+syn-00118,i again resources and again routine feel,mentalhealth
+syn-00119,just nervous maybe about deadline this feel,anxiety
+syn-00120,panic think panic day really think,anxiety
+syn-00121,numb just tired week week just,depression
+syn-00122,i much alone and again weekend week,lonely
+syn-00123,it is people numb when again motivation and think,depression
+syn-00124,day alone day about alone this really,lonely
+syn-00125,i not empty and not numb feel,depression
+syn-00126,it is today overthinking when people nervous and people,anxiety
+syn-00127,i week weekend and week alone think,lonely
+syn-00128,today panic today about helpline this again,suicidewatch
+syn-00129,it is work worry when week helpline and people,suicidewatch
+syn-00130,deadline maybe overthinking just day maybe,anxiety
+syn-00131,work alone again about heavy this not,depression
+syn-00132,i feel quiet and work isolated lately,lonely
+syn-00133,therapy work resources week feel work,mentalhealth
+syn-00134,it is just advice when just routine and really,mentalhealth
+syn-00135,it is really exam when today reaching and people,suicidewatch
+syn-00136,advice think resources think work think,mentalhealth
+syn-00137,it is today resources when think friends and week,lonely
+syn-00138,it is maybe overwhelmed when much reaching and just,suicidewatch
+syn-00139,much deadline lately about panic this lately,anxiety
+syn-00140,friends maybe friends just again maybe,lonely
+syn-00141,isolated week quiet people day week,lonely
+syn-00142,i week overthinking and today worry not,anxiety
+syn-00143,again tired really about motivation this work,depression
+syn-00144,it is again numb when week empty and not,depression
+syn-00145,it is much overthinking when feel deadline and week,anxiety
+syn-00146,habits week resources work feel week,mentalhealth
+syn-00147,it is maybe urgent when day helpline and just,suicidewatch
+syn-00148,i feel sleep and week heavy again,depression
+syn-00149,friends lately friends lately people lately,lonely
+syn-00150,it is just support when lately habits and day,mentalhealth
+syn-00151,not helpline not about overwhelmed this work,suicidewatch
+syn-00152,it is really deadline when feel overthinking and week,anxiety
+syn-00153,work heavy feel about deadline this lately,anxiety
+syn-00154,it is lately routine when people advice and think,mentalhealth
+syn-00155,it is people friends when lately motivation and really,depression
+syn-00156,routine people support today lately people,mentalhealth
+syn-00157,i work resources and think support lately,mentalhealth
+syn-00158,panic week exam work day week,anxiety
+syn-00159,today worry really about panic this people,anxiety
+syn-00160,isolated maybe invite week think maybe,lonely
+syn-00161,i week support and maybe habits really,mentalhealth
+syn-00162,lately nervous think about nervous this much,anxiety
+syn-00163,maybe worry maybe about overwhelmed this maybe,suicidewatch
+syn-00164,day therapy today about routine this week,mentalhealth
+syn-00165,i think overwhelmed and work overwhelmed day,suicidewatch
+syn-00166,heavy again panic not week again,anxiety
+syn-00167,i today resources and just resources maybe,mentalhealth
+syn-00168,exhausted lately exhausted maybe week lately,suicidewatch
+syn-00169,it is again reaching when people resources and much,mentalhealth
+syn-00170,today panic just about worry this not,anxiety
+syn-00171,invite really weekend much maybe really,lonely
+syn-00172,it is again weekend when week friends and day,lonely
+syn-00173,i lately heavy and day heavy think,depression
+syn-00174,i today friends and people isolated think,lonely
+syn-00175,i just support and again resources people,mentalhealth
+syn-00176,it is people crisis when think overwhelmed and week,suicidewatch
+syn-00177,heavy really tired lately maybe really,depression
+syn-00178,again empty not about motivation this think,depression
+syn-00179,lately worry much about overthinking this not,anxiety
+syn-00180,helpline today helpline again people today,suicidewatch
+syn-00181,i again invite and week quiet think,lonely
+syn-00182,urgent not exhausted not really not,suicidewatch
+syn-00183,just helpline again about helpline this day,suicidewatch
+syn-00184,urgent think reaching think day think,suicidewatch
+syn-00185,exam really worry today much really,anxiety
+syn-00186,it is not tired when lately sleep and really,depression
+syn-00187,it is much support when people therapy and think,mentalhealth
+syn-00188,it is work friends when much friends and really,lonely
+syn-00189,it is people empty when feel motivation and much,depression
+syn-00190,it is day alone when people alone and much,lonely
+syn-00191,i much panic and day deadline today,anxiety
+syn-00192,people overthinking people about overthinking this work,anxiety
+syn-00193,it is much panic when really exam and day,anxiety
+syn-00194,it is week weekend when work invite and day,lonely
+syn-00195,i today empty and just heavy people,depression
+syn-00196,it is think urgent when work urgent and again,suicidewatch
+syn-00197,i not weekend and people alone lately,lonely
+syn-00198,it is week numb when people sleep and think,depression
+syn-00199,i feel reaching and day overwhelmed think,suicidewatch
