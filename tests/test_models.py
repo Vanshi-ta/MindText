@@ -1,7 +1,6 @@
 import importlib.util
 
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
 import pytest
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
@@ -127,7 +126,6 @@ def test_bundle_predict_frame_shapes_and_validation(tab_cfg, text_cfg, text_df):
 
 
 def test_rf_balanced_uses_explicit_sample_weights_not_class_weight_param(tab_cfg):
-    from sklearn.ensemble import RandomForestClassifier
     from mindtext.synthetic import make_tabular_dataset
     d = make_tabular_dataset(seed=5)
     X, y = d.filter(like="_mean"), d["label"]
@@ -161,13 +159,28 @@ def test_balanced_weights_equal_class_totals_and_match_sklearn_balanced():
     assert np.allclose(w, compute_sample_weight("balanced", y))
 
 
-def test_svm_does_not_pass_deprecated_probability_param(tab_cfg):
-    spec = ModelSpec(name="s", type="svm_rbf")
-    svc = build_pipeline(tab_cfg, spec).named_steps["clf"]
+
+def test_svm_does_not_pass_deprecated_probability_param(tab_cfg, monkeypatch):
     import warnings
+    import mindtext.models as models
     from mindtext.synthetic import make_tabular_dataset
+
+    spec = ModelSpec(name="s", type="svm_rbf")
+    original_svc = models.SVC
+    calls = []
+
+    def tracked_svc(*args, **kwargs):
+        calls.append(kwargs.copy())
+        return original_svc(*args, **kwargs)
+
+    monkeypatch.setattr(models, "SVC", tracked_svc)
+
     d = make_tabular_dataset(seed=5)
     with warnings.catch_warnings():
         warnings.simplefilter("error", FutureWarning)
-        build_pipeline(tab_cfg, spec).fit(d.filter(like="_mean"), d["label"])
-    assert svc.probability is False
+        models.build_pipeline(tab_cfg, spec).fit(
+            d.filter(like="_mean"), d["label"]
+        )
+
+    assert calls
+    assert all("probability" not in kwargs for kwargs in calls)
