@@ -48,7 +48,7 @@ pip install -e ".[boosting]"       # optional: xgboost, lightgbm
 pip install -e ".[nlp]"            # optional: nltk (lemmatisation / legacy cleaning)
 pip install -e ".[app]"            # optional: streamlit demo
 ```
-Developed and tested with Python 3.12.3, numpy 2.4.4, pandas 3.0.2, scikit-learn 1.8.0 only; lower bounds in `pyproject.toml` are declared, not verified.
+Developed and tested locally with Python 3.12.3, numpy 2.4.4, pandas 3.0.2, scikit-learn 1.8.0. GitHub Actions installs the newest scikit-learn (1.9 at the time of writing), which exposed a Random Forest `class_weight` failure that is now worked around (see `BalancedSampleWeightClassifier`); other 1.9 differences may remain; lower bounds in `pyproject.toml` are declared, not verified.
 
 ## 6. Quick start (synthetic data, works immediately)
 ```bash
@@ -84,7 +84,7 @@ Scores on the synthetic samples are meaningless by construction.
 ```bash
 pytest
 ```
-Synthetic fixtures only; no downloads. In the build environment `pytest` could not be installed (offline), so the 100 test functions (122 cases after parametrisation) were run with a small stand-in runner: **120 passed, 2 skipped** (xgboost/lightgbm not installed). Real `pytest` and `ruff`, and the GitHub Actions workflow (`.github/workflows/ci.yml`), have **not** been run - run them once and fix anything they flag.
+Synthetic fixtures only; no downloads. In the build environment `pytest` could not be installed (offline), so the 103 test functions (125 cases after parametrisation) were run with a small stand-in runner: **123 passed, 2 skipped** (xgboost/lightgbm not installed). Real `pytest` and `ruff`, and the GitHub Actions workflow (`.github/workflows/ci.yml`), have **not** been run - run them once and fix anything they flag.
 
 ## 11. Optional demo app
 `streamlit run app/streamlit_app.py` shows the latest report and a text demo with prominent disclaimers; it never shows placeholder metrics. It was syntax-checked but **not run** (streamlit unavailable). The CLI and package do not need it.

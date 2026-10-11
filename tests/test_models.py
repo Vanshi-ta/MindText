@@ -1,13 +1,14 @@
 import importlib.util
 
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 import pytest
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 
 from mindtext.config import ModelSpec
 from mindtext.errors import MissingDependencyError, ModelError
-from mindtext.models import (LabelEncodedClassifier, ModelBundle, build_pipeline, positive_scores,
+from mindtext.models import (BalancedSampleWeightClassifier, LabelEncodedClassifier, ModelBundle, build_pipeline, positive_scores,
                              predict_with_scores)
 
 HAS_XGB = importlib.util.find_spec("xgboost") is not None
@@ -123,3 +124,50 @@ def test_bundle_predict_frame_shapes_and_validation(tab_cfg, text_cfg, text_df):
     assert tb.predict_frame(["worry about the exam", "tired and empty"]).shape[0] == 2
     with pytest.raises(ModelError, match="No input"):
         tb.predict_frame([])
+
+
+def test_rf_balanced_uses_explicit_sample_weights_not_class_weight_param(tab_cfg):
+    from sklearn.ensemble import RandomForestClassifier
+    from mindtext.synthetic import make_tabular_dataset
+    d = make_tabular_dataset(seed=5)
+    X, y = d.filter(like="_mean"), d["label"]
+    spec = ModelSpec(name="rf", type="rf", params={"n_estimators": 20, "class_weight": "balanced"})
+    pipe = build_pipeline(tab_cfg, spec)
+    clf = pipe.named_steps["clf"]
+    assert isinstance(clf, BalancedSampleWeightClassifier)
+    assert clf.estimator.class_weight is None            # sklearn's own class_weight path is bypassed
+    pipe.fit(X, y)
+    assert pipe.predict(X).shape == (len(X),) and set(pipe.classes_) == {"0", "1"}
+    assert pipe.predict_proba(X).shape == (len(X), 2)
+    assert clf.feature_importances_.shape[0] == X.shape[1]
+
+
+def test_balanced_weights_equal_class_totals_and_match_sklearn_balanced():
+    from sklearn.utils.class_weight import compute_sample_weight
+
+    seen = {}
+
+    class Spy(LogisticRegression):
+        def fit(self, X, y, sample_weight=None):
+            seen["w"] = sample_weight
+            return super().fit(X, y, sample_weight=sample_weight)
+
+    rng = np.random.default_rng(0)
+    X = rng.normal(size=(50, 3))
+    y = np.array(["a"] * 40 + ["b"] * 10)
+    BalancedSampleWeightClassifier(Spy()).fit(X, y)
+    w = seen["w"]
+    assert w[y == "a"].sum() == pytest.approx(w[y == "b"].sum())
+    assert np.allclose(w, compute_sample_weight("balanced", y))
+
+
+def test_svm_does_not_pass_deprecated_probability_param(tab_cfg):
+    spec = ModelSpec(name="s", type="svm_rbf")
+    svc = build_pipeline(tab_cfg, spec).named_steps["clf"]
+    import warnings
+    from mindtext.synthetic import make_tabular_dataset
+    d = make_tabular_dataset(seed=5)
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", FutureWarning)
+        build_pipeline(tab_cfg, spec).fit(d.filter(like="_mean"), d["label"])
+    assert svc.probability is False

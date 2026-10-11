@@ -60,6 +60,35 @@ class LabelEncodedClassifier(ClassifierMixin, BaseEstimator):
         return self.estimator_.predict_proba(X)
 
 
+class BalancedSampleWeightClassifier(ClassifierMixin, BaseEstimator):
+    """Apply 'balanced' class weighting by passing explicit per-sample weights
+    (n / (n_classes * n_class)) to ``fit``.  Used for Random Forest instead of
+    ``class_weight='balanced'``, whose internal handling of string labels broke
+    on newer scikit-learn releases (seen on 1.9 in CI).  Weights are computed
+    from the data given to ``fit``, i.e. the training fold only."""
+
+    def __init__(self, estimator=None):
+        self.estimator = estimator
+
+    def fit(self, X, y):
+        y = np.asarray(y)
+        classes, inverse, counts = np.unique(y, return_inverse=True, return_counts=True)
+        weights = (len(y) / (len(classes) * counts))[inverse]
+        self.estimator_ = clone(self.estimator).fit(X, y, sample_weight=weights)
+        self.classes_ = self.estimator_.classes_
+        return self
+
+    def predict(self, X):
+        return self.estimator_.predict(X)
+
+    def predict_proba(self, X):
+        return self.estimator_.predict_proba(X)
+
+    @property
+    def feature_importances_(self):
+        return self.estimator_.feature_importances_
+
+
 def _make_classifier(spec: ModelSpec, task: str, seed: int, n_jobs: int):
     t, p = spec.type, dict(spec.params)
     if t == "majority":
@@ -73,11 +102,16 @@ def _make_classifier(spec: ModelSpec, task: str, seed: int, n_jobs: int):
     if t == "linearsvc":
         return LinearSVC(**{"random_state": seed, **p})
     if t == "svm_rbf":
-        # probability=False on purpose: Platt scaling collapsed on the small
-        # E-DAIC splits (see docs/original_results.md); the margin is used instead.
-        return SVC(**{"kernel": "rbf", "probability": False, "random_state": seed, **p})
+        # Platt scaling (probability=True) collapsed on the small E-DAIC splits (see
+        # docs/original_results.md) and is deprecated in scikit-learn 1.9, so the parameter
+        # is deliberately not passed: the default (False) means the margin is used.
+        return SVC(**{"kernel": "rbf", "random_state": seed, **p})
     if t == "rf":
-        return RandomForestClassifier(**{"n_estimators": 100, "random_state": seed, "n_jobs": n_jobs, **p})
+        rf_params = {"n_estimators": 100, "random_state": seed, "n_jobs": n_jobs, **p}
+        if rf_params.get("class_weight") == "balanced":
+            rf_params.pop("class_weight")
+            return BalancedSampleWeightClassifier(RandomForestClassifier(**rf_params))
+        return RandomForestClassifier(**rf_params)
     if t == "xgboost":
         try:
             from xgboost import XGBClassifier
